@@ -1,18 +1,17 @@
-// rectangle pattern
-
 #include <iostream>
 using namespace std;
 
 int main()
 {
-    int i, j;
-    for (i = 1; i <= 5; i++)
+    int k = 1;
+    for (int i = 1; i <= 5; i++)
     {
-        for (j = 1; j <= 5; j++)
+        for (int j = 1; j <= i; j++)
         {
-            cout << "*";
+            cout << i;
         }
         cout << endl;
     }
+
     return 0;
 }
