@@ -1,46 +1,36 @@
-#include <bits/stdc++.h>
+#include <iostream>
+#include <math.h>
+
 using namespace std;
 
 int main()
 {
-    int arr[] = {1, 4, 0, 0, 3, 10, 5};
-    int n = sizeof(arr) / sizeof(arr[0]);
+    int n, d, m;
+    cin >> n;
+    int arr[n];
+    for (int i = 0; i < n; i++)
+        cin >> arr[i];
 
-    int target = 7;
+    // use two pointer approach
+    // when sum larger, increment left pointer
+    // when sum is less, increment right pointer
 
-    // TODO: use two pointer approach
-    // TODO: when sum larger, increment left pointer
-    // TODO: when sum is less, increment right pointer
-
-    int i = 0, j = 0;
-    int currSum = arr[0];
-
+    int s = 7; // this is the required sum
+    int i = 0, j = 0, sum = 0;
     while (j < n)
     {
-        if (currSum == target)
+        sum += arr[j];
+        while (sum > s)
+        {
+            sum -= arr[i];
+            i++;
+        }
+        if (sum == s)
         {
             break;
         }
-        if (currSum < target)
-        {
-            j++;
-            currSum += arr[j];
-        }
-        else
-        {
-            currSum -= arr[i];
-            i++;
-        }
+        j++;
     }
-    if (currSum != target)
-    {
-        cout << "Not possible";
-    }
-    else
-    {
-
-        cout << i << j << endl;
-    }
-
-    return 0;
+    cout << i << " " << j << endl;
+    return 1;
 }
