@@ -3,6 +3,7 @@ using namespace std;
 
 bool isSafe(int **arr, int x, int y, int n)
 {
+    // checking for row
     for (int row = 0; row < x; row++)
     {
         if (arr[row][y] == 1)
@@ -10,6 +11,7 @@ bool isSafe(int **arr, int x, int y, int n)
     }
     int row = x;
     int col = y;
+    // checking left diagonal
     while (row >= 0 and col >= 0)
     {
         if (arr[row][col] == 1)
@@ -19,6 +21,7 @@ bool isSafe(int **arr, int x, int y, int n)
         row--;
         col--;
     }
+    // checking right diagonal
     row = x;
     col = y;
     while (row >= 0 and col < n)
