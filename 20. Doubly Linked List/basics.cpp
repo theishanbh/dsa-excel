@@ -6,10 +6,12 @@ class Node
 public:
     int data;
     Node *next;
+    Node *prev;
     Node(int val)
     {
         this->data = val;
         this->next = nullptr;
+        this->prev = nullptr;
     }
 };
 
@@ -25,8 +27,11 @@ void insertAtTail(Node *&head, int data)
     }
     Node *temp = head;
     while (temp->next != nullptr)
+    {
         temp = temp->next;
+    }
     temp->next = new Node(data);
+    temp->next->prev = temp;
 }
 
 // insert at head
@@ -35,6 +40,7 @@ void insertAtHead(Node *&node, int data)
 {
     Node *temp = new Node(data);
     temp->next = node;
+    temp->next->prev = temp;
     node = temp;
 }
 
@@ -49,21 +55,6 @@ void displayNodes(Node *&node)
         temp = temp->next;
     }
     cout << endl;
-}
-
-// search for an element in linked list
-int search(Node *&node, int key)
-{
-    Node *temp = node;
-    int ind = 0;
-    while (temp != nullptr)
-    {
-        if (key == temp->data)
-            return ind;
-        temp = temp->next;
-        ind += 1;
-    }
-    return -1;
 }
 
 // deleting at tail
@@ -95,38 +86,7 @@ void deleteAtHead(Node *&head)
         return;
     }
     head = head->next;
-}
-
-// reversing linked list
-void reverseLinkedlist(Node *&head)
-{
-    // if 0 or 1 elements return
-    if (head == nullptr || head->next == nullptr)
-    {
-        return;
-    }
-    // make 3 pointers : prev, curr, next
-    // initialize prev pointer with null
-    Node *prev = nullptr;
-    // initialize curr pointer with head
-    Node *curr = head;
-    // initialize next pointer with second element
-    Node *forward = head->next;
-    // iterate curr so that it hits null
-    while (curr != nullptr)
-    {
-        // over each iteration point, curr to prev, and change adress of curr to next, and next to next of next
-        forward = curr->next;
-        curr->next = prev;
-        prev = curr;
-        curr = forward;
-    }
-    head = prev;
-}
-
-// reverse k nodes in linked list
-void reverseKNodes(Node *&head)
-{
+    head->prev = nullptr;
 }
 
 int main()
@@ -149,9 +109,20 @@ int main()
     insertAtTail(linkedList, 3);
     insertAtHead(linkedList, 1);
     displayNodes(linkedList);
-    // reversing linkedlist
-    reverseLinkedlist(linkedList);
-    displayNodes(linkedList);
+    // printing straight
+    while (linkedList->next != nullptr)
+    {
+        cout << linkedList->data << " ";
+        linkedList = linkedList->next;
+    }
+    cout << linkedList->data << endl;
+    // printing backwards
+    while (linkedList->prev != nullptr)
+    {
+        cout << linkedList->data << " ";
+        linkedList = linkedList->prev;
+    }
+    cout << linkedList->data << endl;
 
     return 0;
 }
