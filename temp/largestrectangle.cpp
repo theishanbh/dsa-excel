@@ -13,7 +13,7 @@ int main()
         {
             rect.push(i);
         }
-        if ()
+        if (rect.top() > hist[i]){}
     }
 
     /* brute force method
