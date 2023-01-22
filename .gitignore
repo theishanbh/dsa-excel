@@ -1,6 +1,3 @@
-# Ignore executables
-*.exe
-*.dll
-
-# Ignore files with no extension
-*.*
+*
+!/**/
+!*.*
